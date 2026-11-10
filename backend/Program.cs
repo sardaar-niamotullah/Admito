@@ -11,7 +11,7 @@ app.UseCors();
 
 app.MapGet("/api/hello", async (NpgsqlDataSource db) =>
 {
-    await using var cmd = db.CreateCommand("SELECT 'Hello World'");
+    await using var cmd = db.CreateCommand("SELECT 'Hello World daw'");
     var message = (string?)await cmd.ExecuteScalarAsync();
     return Results.Ok(new { message });
 });
