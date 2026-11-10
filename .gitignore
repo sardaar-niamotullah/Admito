@@ -1,0 +1,7 @@
+# .NET
+bin/
+obj/
+
+# Env and OS
+.env
+.DS_Store
