@@ -5,8 +5,5 @@ export default defineConfig({
   plugins: [react()],
   server: {
     watch: { usePolling: true },
-    proxy: {
-      "/api": "http://backend:8080",
-    },
   },
 });

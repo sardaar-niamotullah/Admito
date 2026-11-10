@@ -4,7 +4,7 @@ export default function App() {
   const [message, setMessage] = useState("Loading...");
 
   useEffect(() => {
-    fetch("/api/hello")
+    fetch(`${import.meta.env.VITE_API_URL}/api/hello`)
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
       .catch(() => setMessage("Failed to reach backend"));
