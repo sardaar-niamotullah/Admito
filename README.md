@@ -130,12 +130,14 @@ docker compose up -d
 docker compose exec backend dotnet test Tests
 ```
 
+The tests use their own database, `admito_test`, so your data is not touched.
+
 Tests:
 
-- 100 concurrent hold requests for a class with 10 seats: exactly 10 succeed, the rest return `409`.
-- The same student cannot hold two seats in one class.
+- 1,000 applications sent at the same moment for a class with 100 seats: exactly 100 succeed, the other 900 return `409`.
+- 10 simultaneous applications from the same student: exactly one succeeds.
 - An expired hold releases its seat.
-- A confirmed admission keeps its seat.
+- A confirmed admission keeps its seat after the hold time has passed.
 
 ## Project Structure
 
