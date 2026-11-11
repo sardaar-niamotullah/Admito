@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { EmptyState, ErrorText } from "./Blocks";
+import { EmptyState, ErrorText } from "@/components/Blocks";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props<T> {
   data: T[] | null;
@@ -14,9 +15,7 @@ export function AsyncList<T>({ data, error, emptyText, children }: Props<T>) {
     <>
       <ErrorText className="mb-3">{error}</ErrorText>
       {data === null ? (
-        !error && (
-          <div className="h-36 animate-pulse rounded-2xl bg-zinc-200/60" />
-        )
+        !error && <Skeleton className="h-40 rounded-xl" />
       ) : data.length === 0 ? (
         <EmptyState>{emptyText}</EmptyState>
       ) : (

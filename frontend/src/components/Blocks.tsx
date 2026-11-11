@@ -1,22 +1,7 @@
 import type { ReactNode } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
-export function Card({
-  children,
-  className = "",
-  padded = true,
-}: {
-  children: ReactNode;
-  className?: string;
-  padded?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-2xl border border-zinc-200 bg-white shadow-sm ${padded ? "p-5" : ""} ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
+// Small building blocks shared by every screen.
 
 export function Section({
   title,
@@ -31,7 +16,9 @@ export function Section({
     <section>
       <div className="mb-4">
         <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
-        {subtitle && <p className="mt-0.5 text-sm text-zinc-500">{subtitle}</p>}
+        {subtitle && (
+          <p className="mt-0.5 text-sm text-muted-foreground">{subtitle}</p>
+        )}
       </div>
       {children}
     </section>
@@ -40,11 +27,10 @@ export function Section({
 
 export function EmptyState({ children }: { children: ReactNode }) {
   return (
-    <Card
-      padded={false}
-      className="px-5 py-12 text-center text-sm text-zinc-500"
-    >
-      {children}
+    <Card className="py-12">
+      <CardContent className="text-center text-sm text-muted-foreground">
+        {children}
+      </CardContent>
     </Card>
   );
 }
@@ -57,7 +43,7 @@ export function ErrorText({
   className?: string;
 }) {
   return children ? (
-    <p role="alert" className={`text-sm text-rose-600 ${className}`}>
+    <p role="alert" className={`text-sm text-destructive ${className}`}>
       {children}
     </p>
   ) : null;
