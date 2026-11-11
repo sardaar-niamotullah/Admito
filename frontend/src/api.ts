@@ -1,5 +1,5 @@
-import { API_URL } from "./config";
-import type { ClassItem, MyHold } from "./types";
+import { API_URL } from "@/config";
+import type { ClassItem, MyHold } from "@/types";
 
 async function request<T>(
   path: string,

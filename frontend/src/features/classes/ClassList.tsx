@@ -1,13 +1,13 @@
-import { api } from "../../api";
-import { AsyncList } from "../../components/AsyncList";
-import { Section } from "../../components/Blocks";
-import { useApp } from "../../context/AppContext";
-import { useLoad } from "../../hooks/useLoad";
+import { api } from "@/api";
+import { AsyncList } from "@/components/AsyncList";
+import { Section } from "@/components/Blocks";
+import { useApp } from "@/hooks/useApp";
+import { useLoad } from "@/hooks/useLoad";
 import { ClassCard } from "./ClassCard";
 
 export function ClassList() {
-  const { validStudent, version } = useApp();
-  const { data, error } = useLoad(api.getClasses, [version]);
+  const { validStudent, reloadKey } = useApp();
+  const { data, error } = useLoad(api.getClasses, reloadKey);
 
   return (
     <Section

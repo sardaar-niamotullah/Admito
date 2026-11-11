@@ -1,18 +1,22 @@
-import { api } from "../../api";
-import { AsyncList } from "../../components/AsyncList";
-import { Card, EmptyState, Section } from "../../components/Blocks";
-import { useApp } from "../../context/AppContext";
-import { useLoad } from "../../hooks/useLoad";
-import type { MyHold } from "../../types";
+import { useCallback } from "react";
+import { api } from "@/api";
+import { AsyncList } from "@/components/AsyncList";
+import { EmptyState, Section } from "@/components/Blocks";
+import { Card } from "@/components/ui/card";
+import { useApp } from "@/hooks/useApp";
+import { useLoad } from "@/hooks/useLoad";
+import type { MyHold } from "@/types";
 import { ApplicationRow } from "./ApplicationRow";
 
 export function MyApplications() {
-  const { studentId, validStudent, version } = useApp();
-  const { data, error } = useLoad(
+  const { studentId, validStudent, reloadKey } = useApp();
+
+  const load = useCallback(
     () =>
       validStudent ? api.getMyHolds(studentId) : Promise.resolve<MyHold[]>([]),
-    [studentId, validStudent, version],
+    [studentId, validStudent],
   );
+  const { data, error } = useLoad(load, reloadKey);
 
   return (
     <Section
@@ -26,8 +30,8 @@ export function MyApplications() {
       ) : (
         <AsyncList data={data} error={error} emptyText="No applications yet.">
           {(holds) => (
-            <Card padded={false}>
-              <ul className="divide-y divide-zinc-100">
+            <Card className="gap-0 py-0">
+              <ul className="divide-y">
                 {holds.map((h) => (
                   <ApplicationRow key={h.holdId} item={h} />
                 ))}
