@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { errorMessage } from "../api";
-import { useApp } from "../context/AppContext";
+import { errorMessage } from "@/api";
+import { useApp } from "@/hooks/useApp";
 
 // Runs a button action: tracks busy and error state, then refreshes every list.
 export function useAction() {

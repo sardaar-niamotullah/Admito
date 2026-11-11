@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { errorMessage } from "../api";
+import { errorMessage } from "@/api";
 
-// Loads data whenever deps change. Old data stays visible while reloading.
-export function useLoad<T>(load: () => Promise<T>, deps: unknown[]) {
+// Calls `load` on mount, whenever `load` changes, and whenever `reloadKey` changes.
+// Old data stays visible while reloading.
+export function useLoad<T>(load: () => Promise<T>, reloadKey: number) {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState("");
 
@@ -20,8 +21,7 @@ export function useLoad<T>(load: () => Promise<T>, deps: unknown[]) {
     return () => {
       current = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, [load, reloadKey]);
 
   return { data, error };
 }
